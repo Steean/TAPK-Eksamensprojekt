@@ -1,14 +1,13 @@
-#include "DataObjects.hpp"
 #include <fstream>
 #include <iostream>
 #include <string>
+#include "DataObjects.hpp"
 
 class Reader
 {
 public:
 	template <typename T>
 	Data<T> ReadData();
-	//virtual Settings ReadSettings() = 0;
 };
 
 class FileReader : Reader
@@ -27,7 +26,7 @@ public:
 
 		while (std::getline(stream, line, ';'))
 		{
-			result.data.push_back(std::stoi(line));
+			result.data.push_back(std::stoi(line.c_str()));
 		}
 		stream.close();
 		
@@ -51,8 +50,7 @@ public:
 
 		return result;
 	}
-	//Settings ReadSettings();
+	
 private:
 	std::string _filePath;
-
 };

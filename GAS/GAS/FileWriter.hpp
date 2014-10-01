@@ -25,7 +25,7 @@ public:
 
 		stream.close();
 	}
-	void WriteSettings(const Settings& settingsObj);
+
 private:
 	std::string _filePath;
 };
