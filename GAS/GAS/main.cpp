@@ -1,10 +1,12 @@
 #include "FileWriter.hpp"
+#include <fstream>
+#include <iterator>
 
 int main()
 {
-	FileWriter fw("test.txt");
-	std::vector<int> vect {1,2,3,4,5,6,7,8,9,0};
-	Data<int> dat;
+	FileWriter fw("test");
+	std::vector<double> vect {1.1,2.2,3.3,4.4};
+	Data<double> dat;
 	dat.data = vect;
 	fw.WriteData(dat);
 }
