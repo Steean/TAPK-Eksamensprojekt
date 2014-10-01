@@ -78,9 +78,10 @@
   <ItemGroup>
     <ClInclude Include="DataObjects.hpp" />
     <ClInclude Include="FileWriter.hpp" />
-    <ClInclude Include="Writer.hpp" />
+    <ClInclude Include="FileReader.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="FileReader.cpp" />
     <ClCompile Include="FileWriter.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>

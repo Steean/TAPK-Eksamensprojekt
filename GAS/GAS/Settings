@@ -1,0 +1,5 @@
+maxTemperature: 30.3
+minTemperature: 20.0
+maxHumidity: 80
+minHumidity: 20
+interval: 60

@@ -1,4 +1,5 @@
 #include "FileWriter.hpp"
+#include "FileReader.hpp"
 #include <fstream>
 #include <iterator>
 
@@ -9,4 +10,12 @@ int main()
 	Data<double> dat;
 	dat.data = vect;
 	fw.WriteData(dat);
+
+	Settings settings(30.3, 20.0, 80, 20, 60);
+	fw.WriteSettings(settings);
+
+	FileReader fr("test");
+	Data<double> test = fr.ReadData<double>();
+
+	std::cout << "er vi her";
 }

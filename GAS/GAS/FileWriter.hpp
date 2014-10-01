@@ -1,13 +1,20 @@
-//#include "Writer.hpp"
-
+#include "DataObjects.hpp"
 #include <memory>
 #include <ostream>
-#include "DataObjects.hpp"
 
-class FileWriter
+class Writer
+{
+public:
+	template <typename T>
+	void WriteData(const Data<T>& dataObj);
+	virtual void WriteSettings(const Settings& settingsObj) = 0;
+};
+
+class FileWriter : Writer
 {
 public:
 	FileWriter(std::string filePath);
+	std::ofstream& operator<<(const Settings& set);
 	template <typename T>
 	void WriteData(const Data<T>& dataObj)
 	{

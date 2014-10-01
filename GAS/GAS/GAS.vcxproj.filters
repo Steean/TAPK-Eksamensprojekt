@@ -15,13 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Writer.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="FileWriter.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DataObjects.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FileReader.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -30,6 +30,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FileReader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
