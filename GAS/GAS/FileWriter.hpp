@@ -6,26 +6,21 @@ class Writer
 {
 public:
 	template <typename T>
-	void WriteData(const Data<T>& dataObj);
-	virtual void WriteSettings(const Settings& settingsObj) = 0;
+	void WriteData(const std::string& filepath, const Data<T>& dataObj);
 };
 
 class FileWriter : Writer
 {
 public:
-	FileWriter(std::string filePath);
 	std::ofstream& operator<<(const Settings& set);
 	template <typename T>
-	void WriteData(const Data<T>& dataObj)
+	void WriteData(const std::string& filepath, const Data<T>& dataObj)
 	{
 		std::ofstream stream;
 
-		stream.open(_filePath);
+		stream.open(filepath);
 		std::copy(dataObj.data.begin(), dataObj.data.end(), std::ostream_iterator<T>(stream, ";"));
 
 		stream.close();
 	}
-
-private:
-	std::string _filePath;
 };
