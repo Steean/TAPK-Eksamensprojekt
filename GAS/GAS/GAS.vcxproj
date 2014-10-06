@@ -80,11 +80,12 @@
     <ClInclude Include="DataObjects.hpp" />
     <ClInclude Include="FileWriter.hpp" />
     <ClInclude Include="FileReader.hpp" />
+    <ClInclude Include="Memory.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="FileReader.cpp" />
-    <ClCompile Include="FileWriter.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Memory.cpp" />
+    <ClCompile Include="Window.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,56 +1,56 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <vector>
 #include "DataObjects.hpp"
 
 class Reader
 {
 public:
 	template <typename T>
-	Data<T> ReadData();
+	Data<T> ReadData(const std::string& filepath);
 };
 
 class FileReader : Reader
 {
 public:
-	FileReader(std::string filepath);
-
 	template<typename T, typename std::enable_if<std::is_same<T,int>::value, int>::type = 0>
-	Data<T> ReadData()
+	std::vector<T> ReadData(const std::string& filepath, int noReadings)
 	{
-		Data<T> result;
-		std::string line = "";
+		std::vector<T> result;
+		std::string reading = "";
+		int index = 1;
 
 		std::ifstream stream;
-		stream.open(_filePath);
+		stream.open(filepath);
 
-		while (std::getline(stream, line, ';'))
+		while (std::getline(stream, reading, ';') && index <= noReadings)
 		{
-			result.data.push_back(std::stoi(line.c_str()));
-		}
-		stream.close();
-		
-		return result;
-	}
-
-	template<typename T, typename std::enable_if<std::is_same<T, double>::value, double>::type = 0>
-	Data<T> ReadData()
-	{
-		Data<T> result;
-		std::string line = "";
-
-		std::ifstream stream;
-		stream.open(_filePath);
-
-		while (std::getline(stream, line, ';'))
-		{
-			result.data.push_back(std::atof(line));
+			result.push_back(std::stoi(reading.c_str()));
+			index++;
 		}
 		stream.close();
 
 		return result;
 	}
-	
-private:
-	std::string _filePath;
+
+	template<typename T, typename std::enable_if<std::is_same<T, double>::value, int>::type = 0>
+	std::vector<T> ReadData(const std::string& filepath, int noReadings)
+	{
+		std::vector<T> result;
+		std::string reading = "";
+		int index = 1;
+
+		std::ifstream stream;
+		stream.open(filepath);
+
+		while (std::getline(stream, reading, ';') && index <= noReadings)
+		{
+			result.push_back(std::atof(reading.c_str()));
+			index++;
+		}
+		stream.close();
+
+		return result;
+	}
 };
