@@ -1,3 +1,5 @@
+#include <mutex>
+#include <furure>
 #include "DataObjects.hpp"
 #include "FileWriter.hpp"
 #include "FileReader.hpp"
@@ -8,10 +10,12 @@ private:
 	Data<double> temperature;
 	Data<int> humidity;
 	int dataThreshold;
-	FileWriter fileWriter;
-	FileReader fileReader;
+	Details::FileWriter fileWriter;
+	Details::FileReader fileReader;
 	void ThresholdCheck();
 	void WriteToFile();
+	std::mutex temperatureMutex;
+	std::mutex humidityMutex;
 public:
 	Memory(int threshold);
 
@@ -37,7 +41,7 @@ public:
 	}
 	
 	template<typename T, typename std::enable_if<std::is_same<T, double>::value, int>::type = 0>
-	Data<T> GetData(int noReadings)
+	std::future<Data<T>> GetData(int noReadings)
 	{
 		Data<T> result;
 		if (temperature.data.size() >= noReadings)
@@ -60,7 +64,8 @@ public:
 	template<typename T, typename std::enable_if<std::is_same<T, int>::value, int>::type = 0>
 	void PutData(T data)
 	{
-		humidity.data.push_back(data);
+		std::lock_guard<std::mutex> humidityLock(humidityMutex);
+		humidity.data.push_back(data);		
 		if (humidity.data.size() >= dataThreshold)
 		{
 			WriteToFile();
@@ -70,6 +75,7 @@ public:
 	template<typename T, typename std::enable_if<std::is_same<T, double>::value, int>::type = 0>
 	void PutData(T data)
 	{
+		std::lock_guard<std::mutex> temperatureLock(temperatureMutex);
 		temperature.data.push_back(data);
 		if (temperature.data.size() >= dataThreshold)
 		{

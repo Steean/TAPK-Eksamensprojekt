@@ -6,6 +6,12 @@
 
 namespace sc = boost::statechart;
 
+enum state 
+{	
+	Water,
+	Window
+};
+
 //Events
 struct MaxTemperatureThreshold : sc::event <MaxTemperatureThreshold> {};
 struct MinTemperatureThreshold : sc::event <MinTemperatureThreshold> {};
@@ -22,7 +28,7 @@ struct Close;
 
 struct GAS : sc::simple_state<GAS, Machine, boost::mpl::list<Off, Close>> {};
 
-struct Off : sc::simple_state <Off, GAS::orthogonal<0>>
+struct Off : sc::simple_state <Off, GAS::orthogonal<state::Water>>
 {
 	Off()
 	{
@@ -31,7 +37,7 @@ struct Off : sc::simple_state <Off, GAS::orthogonal<0>>
 	typedef sc::transition<MinHumidityThreshold, On> reactions;
 };
 
-struct On : sc::simple_state <On, GAS::orthogonal<0>>
+struct On : sc::simple_state <On, GAS::orthogonal<state::Water>>
 {
 	On()
 	{
@@ -40,7 +46,7 @@ struct On : sc::simple_state <On, GAS::orthogonal<0>>
 	typedef sc::transition<MaxHumidityThreshold, Off> reactions;
 };
 
-struct Close : sc::simple_state <Close, GAS::orthogonal<1>>
+struct Close : sc::simple_state <Close, GAS::orthogonal<state::Window>>
 {
 	Close()
 	{
@@ -49,7 +55,7 @@ struct Close : sc::simple_state <Close, GAS::orthogonal<1>>
 	typedef sc::transition<MaxTemperatureThreshold, Open> reactions;
 };
 
-struct Open : sc::simple_state <Open, GAS::orthogonal<1>>
+struct Open : sc::simple_state <Open, GAS::orthogonal<state::Window>>
 {
 	Open()
 	{

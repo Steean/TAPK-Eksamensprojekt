@@ -2,6 +2,9 @@
 #include <memory>
 #include <ostream>
 
+namespace Details
+{
+
 class Writer
 {
 public:
@@ -24,3 +27,5 @@ public:
 		stream.close();
 	}
 };
+
+}
