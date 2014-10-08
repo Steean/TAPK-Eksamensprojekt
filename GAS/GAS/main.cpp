@@ -10,7 +10,7 @@
 
 int main()
 {
-	FileWriter fw;
+	Details::FileWriter fw;
 	std::vector<double> vect {1.1,2.2,3.3,4.4,5.5};
 	Data<double> dat;
 	dat.data = vect;
@@ -20,7 +20,7 @@ int main()
 	
 	mem.PutData<double>(1.2);
 	mem.PutData<double>(3.4);
-	mem.PutData<double>(5.6);
+	mem.PutData<double>(5.6);	
 
 	std::this_thread::sleep_for(std::chrono::seconds(3));
 
@@ -30,7 +30,7 @@ int main()
 
 	std::cout << "DEBUG FUCKING POINT!";
 
-
+	
 
 	/*Settings settings(30.3, 20.0, 80, 20, 60);
 	settings.save("settings.xml");

@@ -9,7 +9,7 @@ class Writer
 {
 public:
 	template <typename T>
-	void WriteData(const std::string& filepath, const Data<T>& dataObj);
+	void WriteData(const std::string& filepath, Data<T>& dataObj);
 };
 
 class FileWriter : Writer
@@ -17,7 +17,7 @@ class FileWriter : Writer
 public:
 	std::ofstream& operator<<(const Settings& set);
 	template <typename T>
-	void WriteData(const std::string& filepath, const Data<T>& dataObj)
+	void WriteData(const std::string& filepath, Data<T>& dataObj)
 	{
 		std::ofstream stream;
 
