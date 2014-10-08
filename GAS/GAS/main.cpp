@@ -1,32 +1,43 @@
-//#include <fstream>
 #include <iterator>
-//#include "FileWriter.hpp"
-//#include "FileReader.hpp"
-#include "Window.hpp"
-#include "Memory.hpp"
 #include <chrono>
 #include <thread>
-
+#include "Window.hpp"
+#include "Memory.hpp"
+#include "GASSystem.hpp"
+#include "TemperatureSensor.hpp"
+#include "IntervalTimer.hpp"
 
 int main()
 {
-	Details::FileWriter fw;
+	/*Details::FileWriter fw;
 	std::vector<double> vect {1.1,2.2,3.3,4.4,5.5};
 	Data<double> dat;
-	dat.data = vect;
+	dat.data = vect;*/
 	//fw.WriteData("temperature", dat);
 
-	Memory mem(2);
+	//Memory mem(2);
+	//
+	//mem.PutData<double>(1.2);
+	//mem.PutData<double>(3.4);
+	//mem.PutData<double>(5.6);	
+
+	//std::this_thread::sleep_for(std::chrono::seconds(3));
+
+	//auto test = mem.GetData<double>(1);
+	//auto test2 = mem.GetData<double>(2);
+	//auto test3 = mem.GetData<double>(3);
+
+	IntervalTimer timer;	
+	TemperatureSensor tempsens(&timer);
+	HumiditySensor humsens(&timer);
+	GASSystem system(&tempsens, &humsens); 
+
+	timer.Start(std::chrono::milliseconds(2000));
+
 	
-	mem.PutData<double>(1.2);
-	mem.PutData<double>(3.4);
-	mem.PutData<double>(5.6);	
+	std::this_thread::sleep_for(std::chrono::seconds(10));
 
-	std::this_thread::sleep_for(std::chrono::seconds(3));
-
-	auto test = mem.GetData<double>(1);
-	auto test2 = mem.GetData<double>(2);
-	auto test3 = mem.GetData<double>(3);
+	timer.Stop();
 
 	std::cout << "DEBUG FUCKING POINT!";
 

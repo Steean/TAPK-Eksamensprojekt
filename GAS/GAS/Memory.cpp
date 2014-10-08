@@ -2,6 +2,8 @@
 #include <future>
 #include "Memory.hpp"
 
+
+
 Memory::Memory(int threshold)
 {
 	dataThreshold = threshold;
@@ -15,9 +17,9 @@ void Memory::WriteToFile()
 	//auto handle = std::async(std::launch::async, &Details::FileWriter::WriteData<double>, std::string("temperature"), temperature);
 	//auto handle1 = std::async(std::launch::async, &Details::FileWriter::WriteData<double>, std::string("humidity"), humidity);
 
-	fileWriter.WriteData<double>("temperature", temperature);
-	fileWriter.WriteData<int>("humidity", humidity);
+	//fileWriter.WriteData<double>("temperature", temperature);
+	//fileWriter.WriteData<int>("humidity", humidity);
 
-	temperature.data.clear();
-	humidity.data.clear();
+	//temperature.data.clear();
+	//humidity.data.clear();
 }

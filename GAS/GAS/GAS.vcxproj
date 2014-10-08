@@ -80,11 +80,19 @@
     <ClInclude Include="DataObjects.hpp" />
     <ClInclude Include="FileWriter.hpp" />
     <ClInclude Include="FileReader.hpp" />
+    <ClInclude Include="GASSystem.hpp" />
+    <ClInclude Include="HumiditySensor.hpp" />
+    <ClInclude Include="IntervalTimer.hpp" />
     <ClInclude Include="Memory.hpp" />
+    <ClInclude Include="TemperatureSensor.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="GASSystem.cpp" />
+    <ClCompile Include="HumiditySensor.cpp" />
+    <ClCompile Include="IntervalTimer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Memory.cpp" />
+    <ClCompile Include="TemperatureSensor.cpp" />
     <ClCompile Include="Window.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
