@@ -2,6 +2,9 @@
 #include <memory>
 #include <ostream>
 
+#ifndef FILEWRITER_HPP
+#define FILEWRITER_HPP
+
 namespace Details
 {
 
@@ -17,7 +20,7 @@ class FileWriter : Writer
 public:
 	std::ofstream& operator<<(const Settings& set);
 	template <typename T>
-	void WriteData(const std::string& filepath, Data<T>& dataObj)
+	void WriteData(std::string& filepath, Data<T>& dataObj)
 	{
 		std::ofstream stream;
 
@@ -29,3 +32,4 @@ public:
 };
 
 }
+#endif

@@ -4,6 +4,9 @@
 #include "FileWriter.hpp"
 #include "FileReader.hpp"
 
+#ifndef MEMORY_HPP
+#define MEMORY_HPP
+
 class Memory
 {
 private:
@@ -17,7 +20,7 @@ private:
 	//std::mutex temperatureMutex;
 	//std::mutex humidityMutex;
 public:
-	Memory(int threshold);
+	void SetThreshold(int threshold);
 
 	template<typename T, typename std::enable_if<std::is_same<T, int>::value, int>::type = 0>
 	Data<T> GetData(int noReadings)
@@ -83,3 +86,4 @@ public:
 		}
 	}
 };
+#endif

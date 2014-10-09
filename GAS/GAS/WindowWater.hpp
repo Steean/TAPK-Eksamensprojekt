@@ -4,13 +4,16 @@
 #include <boost\statechart\simple_state.hpp>
 #include <boost\statechart\transition.hpp>
 
+#ifndef WINDOWWATER_HPP
+#define WINDOWWATER_HPP
+
 namespace sc = boost::statechart;
 
-enum state 
-{	
-	Water,
-	Window
-};
+//enum state
+//{
+//	Water,
+//	Window
+//};
 
 //Events
 struct MaxTemperatureThreshold : sc::event <MaxTemperatureThreshold> {};
@@ -20,15 +23,15 @@ struct MinHumidityThreshold : sc::event <MinHumidityThreshold> {};
 
 //Top-level state and machine definition
 struct GAS;
-struct Machine : sc::state_machine<Machine, GAS> {};
+struct Machine : sc::state_machine<Machine, GAS> { };
 struct On;
 struct Off;
 struct Open;
 struct Close;
 
-struct GAS : sc::simple_state<GAS, Machine, boost::mpl::list<Off, Close>> {};
+struct GAS : sc::simple_state<GAS, Machine, boost::mpl::list<Off, Close> > {};
 
-struct Off : sc::simple_state <Off, GAS::orthogonal<state::Water>>
+struct Off : sc::simple_state <Off, GAS::orthogonal<0> >
 {
 	Off()
 	{
@@ -37,7 +40,7 @@ struct Off : sc::simple_state <Off, GAS::orthogonal<state::Water>>
 	typedef sc::transition<MinHumidityThreshold, On> reactions;
 };
 
-struct On : sc::simple_state <On, GAS::orthogonal<state::Water>>
+struct On : sc::simple_state <On, GAS::orthogonal<0> >
 {
 	On()
 	{
@@ -46,7 +49,7 @@ struct On : sc::simple_state <On, GAS::orthogonal<state::Water>>
 	typedef sc::transition<MaxHumidityThreshold, Off> reactions;
 };
 
-struct Close : sc::simple_state <Close, GAS::orthogonal<state::Window>>
+struct Close : sc::simple_state <Close, GAS::orthogonal<1> >
 {
 	Close()
 	{
@@ -55,7 +58,7 @@ struct Close : sc::simple_state <Close, GAS::orthogonal<state::Window>>
 	typedef sc::transition<MaxTemperatureThreshold, Open> reactions;
 };
 
-struct Open : sc::simple_state <Open, GAS::orthogonal<state::Window>>
+struct Open : sc::simple_state <Open, GAS::orthogonal<1> >
 {
 	Open()
 	{
@@ -63,3 +66,5 @@ struct Open : sc::simple_state <Open, GAS::orthogonal<state::Window>>
 	}
 	typedef sc::transition<MinTemperatureThreshold, Close> reactions;
 };
+
+#endif

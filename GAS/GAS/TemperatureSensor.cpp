@@ -7,5 +7,5 @@ TemperatureSensor::TemperatureSensor(IntervalTimer* timer)
 
 void TemperatureSensor::Read()
 {
-	temperatureSignal(22.2);
+	
 }

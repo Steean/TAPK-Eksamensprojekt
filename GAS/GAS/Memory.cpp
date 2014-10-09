@@ -4,7 +4,7 @@
 
 
 
-Memory::Memory(int threshold)
+void Memory::SetThreshold(int threshold)
 {
 	dataThreshold = threshold;
 }

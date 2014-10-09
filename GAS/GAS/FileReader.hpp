@@ -5,6 +5,9 @@
 #include <stack>
 #include "DataObjects.hpp"
 
+#ifndef FILEREADER_HPP
+#define FILEREADER_HPP
+
 namespace Details
 {
 
@@ -71,3 +74,5 @@ public:
 };
 
 }
+
+#endif
