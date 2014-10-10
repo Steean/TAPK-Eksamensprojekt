@@ -12,7 +12,7 @@
 class GASSystem
 {
 public:
-	GASSystem(TemperatureSensor* tempsens, HumiditySensor* humsens, int threshold);
+	GASSystem(TemperatureSensor* tempsens, HumiditySensor* humsens, Settings setting);	
 	template <typename T>
 	void SaveDataFromSensors(T data);	
 private:

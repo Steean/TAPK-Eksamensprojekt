@@ -8,5 +8,19 @@ HumiditySensor::HumiditySensor(IntervalTimer* timer)
 
 void HumiditySensor::Read()
 {
-		humiditySignal(30);
+	if (h < 100 && rising)
+	{
+		h++;
+	}
+	else if (h > 0 && !rising)
+	{
+		h--;
+	}
+
+	if (h == 100)
+		rising = false;
+	if (h == 0)
+		rising = true;
+
+	humiditySignal(h);
 }

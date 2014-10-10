@@ -1,6 +1,7 @@
 #include "DataObjects.hpp"
 #include <memory>
 #include <ostream>
+#include <iterator>
 
 #ifndef FILEWRITER_HPP
 #define FILEWRITER_HPP
@@ -24,8 +25,13 @@ public:
 	{
 		std::ofstream stream;
 
-		stream.open(filepath);
+		stream.open(filepath, std::ios::out | std::ios::app);
 		std::copy(dataObj.data.begin(), dataObj.data.end(), std::ostream_iterator<T>(stream, ";"));
+
+		//for (std::vector<T>::const_iterator i = dataObj.data.begin(); i != dataObj.data.end(); ++i)
+		//{
+		//	stream << *i << ";";
+		//}
 
 		stream.close();
 	}

@@ -18,10 +18,10 @@ struct Settings
 	double minTemperature;
 	int maxHumidity;
 	int minHumidity;
-	int dataThreshold;
+	int cacheSize;
 
-	Settings(double maxTemp = 0.0, double minTemp = 0.0, int maxHum = 0, int minHum = 0, int threshold = 0)
-		: maxTemperature(maxTemp), minTemperature(minTemp), maxHumidity(maxHum), minHumidity(minHum), dataThreshold(threshold) {}
+	Settings(double maxTemp = 20.0, double minTemp = 5.0, int maxHum = 90, int minHum = 10, int cachesize = 30)
+		: maxTemperature(maxTemp), minTemperature(minTemp), maxHumidity(maxHum), minHumidity(minHum), cacheSize(cachesize) {}
 
 	void load(const std::string& filename)
 	{
@@ -34,7 +34,7 @@ struct Settings
 		minTemperature = pt.get<double>("Settings.minTemperature");
 		maxHumidity = pt.get<int>("Settings.maxHumidity");
 		minHumidity = pt.get<int>("Settings.minHumidity");
-		dataThreshold = pt.get<int>("Settings.dataThreshold");
+		cacheSize = pt.get<int>("Settings.cacheSize");
 	}
 	void save(const std::string& filename)
 	{
@@ -45,7 +45,7 @@ struct Settings
 		pt.put("Settings.minTemperature", minTemperature);
 		pt.put("Settings.maxHumidity", maxHumidity);
 		pt.put("Settings.minHumidity", minHumidity);
-		pt.put("Settings.dataThreshold", dataThreshold);
+		pt.put("Settings.cacheSize", cacheSize);
 
 		boost::property_tree::xml_parser::write_xml(filename, pt);
 	}

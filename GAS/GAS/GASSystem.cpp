@@ -2,14 +2,15 @@
 #include "GASSystem.hpp"
 #include "WindowWater.hpp"
 
-GASSystem::GASSystem(TemperatureSensor* tempsens, HumiditySensor* humsens, int threshold)
+GASSystem::GASSystem(TemperatureSensor* tempsens, HumiditySensor* humsens, Settings setting)
 {
 	_temperatureSensor = tempsens;
 	_humiditySensor = humsens;
+	_settings = setting;
 	_temperatureSensor->temperatureSignal.connect(boost::bind(&GASSystem::SaveDataFromSensors<double>, this, _1));
 	_humiditySensor->humiditySignal.connect(boost::bind(&GASSystem::SaveDataFromSensors<int>, this, _1));
 
-	memory.SetThreshold(threshold);
+	memory.SetThreshold(_settings.cacheSize);
 
 	greenhouse.initiate();
 }

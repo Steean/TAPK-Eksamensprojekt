@@ -1,25 +1,34 @@
 #include <mutex>
 #include <future>
 #include "Memory.hpp"
+#include "FileWriter.hpp"
 
-
-
-void Memory::SetThreshold(int threshold)
+void Memory::SetThreshold(int cachesize)
 {
-	dataThreshold = threshold;
+	cacheSize = cachesize;
 }
 
-void Memory::WriteToFile()
-{		
-	//std::lock_guard<std::mutex> humidityLock(humidityMutex);
+void Memory::WriteTemperatureToFile()
+{	
 	//std::lock_guard<std::mutex> temperatureLock(temperatureMutex);	
 
-	//auto handle = std::async(std::launch::async, &Details::FileWriter::WriteData<double>, std::string("temperature"), temperature);
-	//auto handle1 = std::async(std::launch::async, &Details::FileWriter::WriteData<double>, std::string("humidity"), humidity);
+	auto func = std::bind(&Details::FileWriter::WriteData<double>, &fileWriter, std::placeholders::_1, std::placeholders::_2);
+	auto handle = std::async(std::launch::async, func, std::string("temperature"), temperature);
 
-	//fileWriter.WriteData<double>("temperature", temperature);
-	//fileWriter.WriteData<int>("humidity", humidity);
+	//fileWriter.WriteData<double>(std::string("temperature"), temperature);
 
-	//temperature.data.clear();
-	//humidity.data.clear();
+	temperature.data.clear();
+}
+
+
+void Memory::WriteHumidityToFile()
+{
+	//std::lock_guard<std::mutex> humidityLock(humidityMutex);
+
+	auto func = std::bind(&Details::FileWriter::WriteData<int>, &fileWriter, std::placeholders::_1, std::placeholders::_2);
+	auto handle = std::async(std::launch::async, func, std::string("humidity"), humidity);
+
+	//fileWriter.WriteData<int>(std::string("humidity"), humidity);
+
+	humidity.data.clear();
 }

@@ -8,8 +8,10 @@ class TemperatureSensor
 {
 private:
 	IntervalTimer* _intervalTimer;
+	double t = 0.0;
+	bool rising = true;
 public:
-	TemperatureSensor(IntervalTimer* timer);
+	TemperatureSensor(IntervalTimer* timer);	
 	boost::signals2::signal<void(double)> temperatureSignal;
 	void Read();
 };

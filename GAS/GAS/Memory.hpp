@@ -1,5 +1,6 @@
 #include <mutex>
 #include <future>
+#include <vector>
 #include "DataObjects.hpp"
 #include "FileWriter.hpp"
 #include "FileReader.hpp"
@@ -12,11 +13,12 @@ class Memory
 private:
 	Data<double> temperature;
 	Data<int> humidity;
-	int dataThreshold;
+	int cacheSize;
 	Details::FileWriter fileWriter;
 	Details::FileReader fileReader;
 	void ThresholdCheck();
-	void WriteToFile();
+	void WriteTemperatureToFile();
+	void WriteHumidityToFile();
 	//std::mutex temperatureMutex;
 	//std::mutex humidityMutex;
 public:
@@ -69,9 +71,9 @@ public:
 	{
 		//std::lock_guard<std::mutex> humidityLock(humidityMutex);
 		humidity.data.push_back(data);		
-		if (humidity.data.size() >= dataThreshold)
+		if (humidity.data.size() >= cacheSize)
 		{
-			WriteToFile();
+			WriteHumidityToFile();
 		}
 	}
 
@@ -80,9 +82,9 @@ public:
 	{
 		//std::lock_guard<std::mutex> temperatureLock(temperatureMutex);
 		temperature.data.push_back(data);
-		if (temperature.data.size() >= dataThreshold)
+		if (temperature.data.size() >= cacheSize)
 		{
-			WriteToFile();
+			WriteTemperatureToFile();
 		}
 	}
 };
