@@ -1,7 +1,8 @@
-#include <boost\signals2.hpp>
-#include "IntervalTimer.hpp"
 #ifndef HUMIDITYSENSOR_HPP
 #define HUMIDITYSENSOR_HPP
+
+#include <boost\signals2.hpp>
+#include "IntervalTimer.hpp"
 
 class HumiditySensor
 {

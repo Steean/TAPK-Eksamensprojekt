@@ -1,3 +1,6 @@
+#ifndef GASSYSTEM_HPP
+#define GASSYSTEM_HPP
+
 #include <iostream>
 #include <memory>
 #include "TemperatureSensor.hpp"
@@ -5,9 +8,6 @@
 #include "DataObjects.hpp"
 #include "Memory.hpp"
 #include "WindowWater.hpp"
-
-#ifndef GASSYSTEM_HPP
-#define GASSYSTEM_HPP
 
 class GASSystem
 {

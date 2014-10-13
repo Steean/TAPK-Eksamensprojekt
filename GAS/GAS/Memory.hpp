@@ -1,12 +1,12 @@
+#ifndef MEMORY_HPP
+#define MEMORY_HPP
+
 #include <mutex>
 #include <future>
 #include <vector>
 #include "DataObjects.hpp"
 #include "FileWriter.hpp"
 #include "FileReader.hpp"
-
-#ifndef MEMORY_HPP
-#define MEMORY_HPP
 
 class Memory
 {
@@ -19,8 +19,8 @@ private:
 	void ThresholdCheck();
 	void WriteTemperatureToFile();
 	void WriteHumidityToFile();
-	//std::mutex temperatureMutex;
-	//std::mutex humidityMutex;
+	std::mutex temperatureMutex;
+	std::mutex humidityMutex;
 public:
 	void SetThreshold(int threshold);
 
@@ -28,6 +28,7 @@ public:
 	Data<T> GetData(int noReadings)
 	{
 		Data<T> result;
+		std::lock_guard<std::mutex> humidityLock(humidityMutex);
 		if (temperature.data.size() >= noReadings)
 		{
 			std::vector<T>::const_iterator first = humidity.data.begin();
@@ -49,6 +50,7 @@ public:
 	Data<T> GetData(int noReadings)
 	{
 		Data<T> result;
+		std::lock_guard<std::mutex> temperatureLock(temperatureMutex);
 		if (temperature.data.size() >= noReadings)
 		{
 			std::vector<T>::const_iterator first = temperature.data.begin();
@@ -69,7 +71,7 @@ public:
 	template<typename T, typename std::enable_if<std::is_same<T, int>::value, int>::type = 0>
 	void PutData(T data)
 	{
-		//std::lock_guard<std::mutex> humidityLock(humidityMutex);
+		std::lock_guard<std::mutex> humidityLock(humidityMutex);
 		humidity.data.push_back(data);		
 		if (humidity.data.size() >= cacheSize)
 		{
@@ -80,7 +82,7 @@ public:
 	template<typename T, typename std::enable_if<std::is_same<T, double>::value, int>::type = 0>
 	void PutData(T data)
 	{
-		//std::lock_guard<std::mutex> temperatureLock(temperatureMutex);
+		std::lock_guard<std::mutex> temperatureLock(temperatureMutex);
 		temperature.data.push_back(data);
 		if (temperature.data.size() >= cacheSize)
 		{

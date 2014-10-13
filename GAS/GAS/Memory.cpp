@@ -15,8 +15,6 @@ void Memory::WriteTemperatureToFile()
 	auto func = std::bind(&Details::FileWriter::WriteData<double>, &fileWriter, std::placeholders::_1, std::placeholders::_2);
 	auto handle = std::async(std::launch::async, func, std::string("temperature"), temperature);
 
-	//fileWriter.WriteData<double>(std::string("temperature"), temperature);
-
 	temperature.data.clear();
 }
 
@@ -27,8 +25,6 @@ void Memory::WriteHumidityToFile()
 
 	auto func = std::bind(&Details::FileWriter::WriteData<int>, &fileWriter, std::placeholders::_1, std::placeholders::_2);
 	auto handle = std::async(std::launch::async, func, std::string("humidity"), humidity);
-
-	//fileWriter.WriteData<int>(std::string("humidity"), humidity);
 
 	humidity.data.clear();
 }

@@ -57,7 +57,7 @@ void StartGreenhouse()
 	TemperatureSensor tempSens(&timer);
 	HumiditySensor humSens(&timer);
 	GASSystem system(&tempSens, &humSens, setting);
-	timer.Start(std::chrono::milliseconds(500));
+	timer.Start(std::chrono::milliseconds(30));
 
 	while (true)
 	{

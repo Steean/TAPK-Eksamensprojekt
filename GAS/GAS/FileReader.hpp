@@ -1,12 +1,12 @@
+#ifndef FILEREADER_HPP
+#define FILEREADER_HPP
+
 #include <fstream>
 #include <iostream>
 #include <string>
 #include <vector>
 #include <stack>
 #include "DataObjects.hpp"
-
-#ifndef FILEREADER_HPP
-#define FILEREADER_HPP
 
 namespace Details
 {

@@ -1,10 +1,10 @@
+#ifndef DATAOBJECTS_HPP
+#define DATAOBJECTS_HPP
+
 #include <vector>
 #include <utility>
 #include <boost\property_tree\ptree.hpp>
 #include <boost\property_tree\xml_parser.hpp>
-
-#ifndef DATAOBJECTS_HPP
-#define DATAOBJECTS_HPP
 
 template <typename T>
 struct Data
@@ -20,7 +20,7 @@ struct Settings
 	int minHumidity;
 	int cacheSize;
 
-	Settings(double maxTemp = 20.0, double minTemp = 5.0, int maxHum = 90, int minHum = 10, int cachesize = 30)
+	Settings(double maxTemp = 20.0, double minTemp = 5.0, int maxHum = 90, int minHum = 10, int cachesize = 2)
 		: maxTemperature(maxTemp), minTemperature(minTemp), maxHumidity(maxHum), minHumidity(minHum), cacheSize(cachesize) {}
 
 	void load(const std::string& filename)

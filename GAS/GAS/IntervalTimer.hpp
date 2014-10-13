@@ -1,9 +1,9 @@
+#ifndef INTERVALTIMER_HPP
+#define INTERVALTIMER_HPP
+
 #include <boost\signals2.hpp>
 #include <thread>
 #include <chrono>
-
-#ifndef INTERVALTIMER_HPP
-#define INTERVALTIMER_HPP
 
 class IntervalTimer
 {

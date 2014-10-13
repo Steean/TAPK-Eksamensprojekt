@@ -1,8 +1,8 @@
-#include <boost/signals2.hpp>
-#include "IntervalTimer.hpp"
-
 #ifndef TEMPERATURESENSOR_HPP
 #define TEMPERATURESENSOR_HPP
+
+#include <boost/signals2.hpp>
+#include "IntervalTimer.hpp"
 
 class TemperatureSensor
 {

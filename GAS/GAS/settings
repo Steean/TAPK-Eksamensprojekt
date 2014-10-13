@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Settings><maxTemperature>20</maxTemperature><minTemperature>5</minTemperature><maxHumidity>90</maxHumidity><minHumidity>10</minHumidity><cacheSize>10</cacheSize></Settings>
+<Settings><maxTemperature>20.0</maxTemperature><minTemperature>5.0</minTemperature><maxHumidity>90</maxHumidity><minHumidity>10</minHumidity><cacheSize>1</cacheSize></Settings>
