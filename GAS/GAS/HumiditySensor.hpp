@@ -14,6 +14,9 @@ public:
 	HumiditySensor(IntervalTimer* timer);	
 	boost::signals2::signal<void(int)> humiditySignal;
 	void Read();
+	int SimulationMax;
+	int SimulationMin;
+	int SimulationStep;
 };
 
 #endif

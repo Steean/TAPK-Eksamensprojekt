@@ -14,6 +14,9 @@ public:
 	TemperatureSensor(IntervalTimer* timer);	
 	boost::signals2::signal<void(double)> temperatureSignal;
 	void Read();
+	double SimulationMax;
+	double SimulationMin;
+	double SimulationStep;
 };
 
 #endif

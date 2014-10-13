@@ -4,22 +4,25 @@ HumiditySensor::HumiditySensor(IntervalTimer* timer)
 {
 	_intervalTimer = timer;
 	_intervalTimer->timerSignal.connect(boost::bind(&HumiditySensor::Read, this));
+	SimulationMax = 100;
+	SimulationMin = 0;
+	SimulationStep = 1;
 }
 
 void HumiditySensor::Read()
 {
-	if (h < 100 && rising)
+	if (h < SimulationMax && rising)
 	{
-		h++;
+		h += SimulationStep;
 	}
-	else if (h > 0 && !rising)
+	else if (h > SimulationMin && !rising)
 	{
-		h--;
+		h -= SimulationStep;
 	}
 
-	if (h == 100)
+	if (h == SimulationMax)
 		rising = false;
-	if (h == 0)
+	if (h == SimulationMin)
 		rising = true;
 
 	humiditySignal(h);
