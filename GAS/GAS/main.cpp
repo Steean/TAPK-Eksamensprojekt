@@ -37,7 +37,7 @@ void ConfigureGreenhouse()
 	set.save("settings");
 }
 
-void StartGreenhouse()
+void StartGreenhouse(double tempMin, double tempMax, double tempStep, int humMin, int humMax, int humStep)
 {
 	system("cls");
 	
@@ -55,7 +55,13 @@ void StartGreenhouse()
 	}
 	IntervalTimer timer;
 	TemperatureSensor tempSens(&timer);
+	tempSens.SimulationMax = tempMax;
+	tempSens.SimulationMin = tempMin;
+	tempSens.SimulationStep = tempStep;
 	HumiditySensor humSens(&timer);
+	humSens.SimulationMax = humMax;
+	humSens.SimulationMin = humMin;
+	humSens.SimulationStep = humStep;
 	GASSystem system(&tempSens, &humSens, setting);
 	timer.Start(std::chrono::milliseconds(500));
 
@@ -83,7 +89,7 @@ int main()
 			ConfigureGreenhouse();
 			break;
 		case 2:
-			StartGreenhouse();
+			StartGreenhouse(0.0, 25.0, 0.5, 0, 100, 1);
 			break;
 		case 3:
 			return 0;			

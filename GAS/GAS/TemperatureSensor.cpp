@@ -3,22 +3,25 @@ TemperatureSensor::TemperatureSensor(IntervalTimer* timer)
 {
 	_intervalTimer = timer;
 	_intervalTimer->timerSignal.connect(boost::bind(&TemperatureSensor::Read, this));
+	SimulationMax = 25.0;
+	SimulationMin = 0.0;
+	SimulationStep = 0.5;
 }
 
 void TemperatureSensor::Read()
 {
-	if (t < 25.0 && rising)
+	if (t < SimulationMax && rising)
 	{
-		t += 0.5;
+		t += SimulationStep;
 	}
-	else if (t > 0.0 && !rising)
+	else if (t > SimulationMin && !rising)
 	{
-		t -= 0.5;
+		t -= SimulationStep;
 	}	
 
-	if (t >= 25.0)
+	if (t >= SimulationMax)
 		rising = false;
-	if (t <= 0.0)
+	if (t <= SimulationMin)
 		rising = true;
 
 	temperatureSignal(t);
